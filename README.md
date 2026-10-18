@@ -109,7 +109,14 @@ restore = "make"
 
 `devdust config` shows where the file is and the settings in effect; `devdust config --edit` opens it in your editor.
 
-To keep one project's dust for good, put an empty `.devdustkeep` file in its folder, or set `"devdust": { "keep": true }` in its `package.json` (`Cargo.toml`, `pyproject.toml`, and `composer.json` have an equivalent; see [docs/design.md](docs/design.md)).
+To keep one project's dust for good, put an empty `.devdustkeep` file in its folder (nothing below it is searched), or set a flag in its manifest. A manifest also covers the projects below it, so a workspace root can keep all of its packages.
+
+| Manifest | Setting |
+|---|---|
+| `package.json` | `"devdust": { "keep": true }` |
+| `composer.json` | `"extra": { "devdust": { "keep": true } }` |
+| `Cargo.toml` | `[package.metadata.devdust]` or `[workspace.metadata.devdust]` with `keep = true` |
+| `pyproject.toml` | `[tool.devdust]` with `keep = true` |
 
 ### Schedule
 

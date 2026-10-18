@@ -4,13 +4,53 @@
 
 ## Install
 
-You need [Rust](https://rustup.rs) (stable) and `git`.
+`devdust` is built from source, so the install compiles it on your machine and copies the program to a folder your shell searches for commands. After that you can type `devdust` in any terminal, in any folder.
+
+1. **Install Rust.** You need `git` and the Rust toolchain (stable). If you don't have Rust yet, install it with [rustup](https://rustup.rs):
+
+   ```sh
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+
+   This installs `cargo`, Rust's build tool, into `~/.cargo/bin` and adds that folder to your `PATH`, the list of folders your shell searches for commands. Open a new terminal afterwards so the change takes effect.
+
+2. **Get the code.**
+
+   ```sh
+   git clone https://github.com/briancabahug/DevDustVacuum.git
+   cd DevDustVacuum
+   ```
+
+3. **Build and install `devdust`.**
+
+   ```sh
+   cargo install --path crates/devdust
+   ```
+
+   `cargo install` compiles an optimized build of `devdust` and copies the finished program to `~/.cargo/bin/devdust`. Because rustup put `~/.cargo/bin` on your `PATH` in step 1, the command is now available everywhere. `make install` does the same thing.
+
+4. **Check that it works.** Open a new terminal and run:
+
+   ```sh
+   devdust --version
+   ```
+
+   If your shell says `command not found`, `~/.cargo/bin` is not on your `PATH`. Add this line to your shell's startup file (`~/.zshrc` for zsh, `~/.bashrc` for bash), then open a new terminal:
+
+   ```sh
+   export PATH="$HOME/.cargo/bin:$PATH"
+   ```
+
+The installed program doesn't depend on the checkout, so you can move or delete the cloned folder afterwards.
+
+To update, pull the latest code and run the install command again; it replaces the old program:
 
 ```sh
+git pull
 cargo install --path crates/devdust
 ```
 
-This puts `devdust` in `~/.cargo/bin`.
+To uninstall, run `cargo uninstall devdust` (or `make uninstall`). This removes the program from `~/.cargo/bin`. If you set up the weekly scan, run `devdust schedule remove` first.
 
 ### Run without installing
 

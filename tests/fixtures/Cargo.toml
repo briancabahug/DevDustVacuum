@@ -1,0 +1,13 @@
+[package]
+name = "devdust-fixtures"
+description = "Test helpers that build fixture project trees"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+tempfile = "3.27.0"
